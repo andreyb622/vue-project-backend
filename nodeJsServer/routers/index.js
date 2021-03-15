@@ -1,3 +1,9 @@
+const users = require('./users')
+const auth = require('./auth')
+const boards = require('./boards')
+
 module.exports = {
-  routes: ['users', 'auth']
-};
+  users,
+  auth,
+  boards
+}

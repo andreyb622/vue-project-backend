@@ -1,6 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const { routes } = require('./routers');
+const  routes  = require('./routers');
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/project',{
@@ -11,12 +10,12 @@ mongoose.connect('mongodb://localhost:27017/project',{
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-routes.forEach((item) => {
-  app.use(`/${item}`, require(`./routers/${item}`));
-});
+app.use('/users', routes.users);
+app.use('/auth', routes.auth);
+app.use('/boards', routes.boards);
 
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () =>{

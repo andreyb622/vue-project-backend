@@ -11,13 +11,7 @@ const updateUserSheme = Joi.object({
     .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     .required(),
 
-  login: Joi.string(),
-
-  access_token: [
-    Joi.string(),
-    Joi.number()
-  ]
+  login: Joi.string()
 })
-  .xor('password', 'access_token')
 
 module.exports = updateUserSheme;

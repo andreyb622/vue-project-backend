@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const createUserSheme = Joi.object({
-  name: Joi.string()
+  username: Joi.string()
     .alphanum()
     .min(3)
     .max(30)
@@ -13,6 +13,5 @@ const createUserSheme = Joi.object({
 
   login: Joi.string(),
 })
-  .xor('password', 'access_token')
 
 module.exports = createUserSheme
