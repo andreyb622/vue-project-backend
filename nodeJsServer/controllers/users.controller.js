@@ -12,7 +12,6 @@ class UsersController {
   }
   getAll = async (req, res, next) => {
     try {
-      console.log('control')
       const result = await service.getAllUsers();
       res.status(200).send(result)
     } catch (err) {

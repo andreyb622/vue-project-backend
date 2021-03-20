@@ -1,21 +1,23 @@
 const { Board } = require('../model')
-const bcrypt = require('bcrypt')
+const { getAllBoardLists } = require('./boardList.services')
 
 const board = (model) => ({
 
-  async getBoard(id) {    
-    return await model.findById(id)
+  async getBoard(boardId) {
+    const board = await model.findById(boardId)
+    const boardLists = await getAllBoardLists(boardId)
+    return { ...board._doc, boardLists: boardLists }
   },
 
-  async getAllBoards(id) {    
+  async getAllBoards(userId) {
     const allBoards = await model.find()
-    const boards = allBoards.filter((e, i) => e.users.includes(id))
+    const boards = allBoards.filter((e, i) => e.users.includes(userId))
     return boards
   },
   
-  async createBoard(id, body) {
+  async createBoard(userId, body) {
     const board = new model(body)
-    board.users.push(id)
+    board.users.push(userId)
     newBoard = await board.save()
     return newBoard
   },
