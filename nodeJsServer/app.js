@@ -1,9 +1,10 @@
 const express = require('express');
+const {MONGO_CONNECTION_STRING, PORT} = require('./key')
 const  routes  = require('./routers');
 const mongoose = require('mongoose')
 const cors = require('cors');
 
-mongoose.connect('mongodb://localhost:27017/project',{
+mongoose.connect(MONGO_CONNECTION_STRING,{
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -21,7 +22,6 @@ app.use('/boards', routes.boards);
 app.use('/boardList', routes.boardList);
 app.use('/card', routes.cards);
 
-const PORT = process.env.PORT || 3000;
 app.listen(3000, () =>{
   console.log(`server on http://localhost:${PORT}`);
 })

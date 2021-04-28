@@ -11,7 +11,7 @@ const board = (model) => ({
 
   async getAllBoards(userId) {
     const allBoards = await model.find()
-    const boards = allBoards.filter((e, i) => e.users.includes(userId))
+    const boards = allBoards.filter(e => e.users.includes(userId))
     return boards
   },
   

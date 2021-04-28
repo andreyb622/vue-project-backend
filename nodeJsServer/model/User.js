@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {secret} = require('../key')
+const {SECRET} = require('../key')
 
 const schema = new Schema({
   username: {
@@ -25,13 +25,28 @@ const schema = new Schema({
   }
 })
 
-schema.statics.findByCredentials = (password, userPassword) => {
-  return bcrypt.compareSync(password, userPassword)
+schema.statics.findByCredentials = async (login, password) => {
+  
+  const user = await User.findOne({login})
+  
+  if (!user) {
+    throw new Error('Unable user');
+  }
+  
+  const isMatch = bcrypt.compareSync(password, user.password)
+
+  if (!isMatch) {
+    throw new Error('Unable to login');
+  }
+  
+  return user
 }
 
 schema.statics.generateAuthToken = (user) => {
-  const token = jwt.sign({id: user.id}, secret);
+  const token = jwt.sign({id: user.id}, SECRET);
   return token
 }
 
-module.exports = model('User', schema)
+const User = model('User', schema);
+
+module.exports = User
