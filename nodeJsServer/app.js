@@ -25,5 +25,3 @@ app.use('/card', routes.cards);
 app.listen(3000, () =>{
   console.log(`server on http://localhost:${PORT}`);
 })
-
-console.log(`Server running at ${PORT}`);

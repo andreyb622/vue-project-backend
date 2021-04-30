@@ -6,9 +6,11 @@ const schema = new Schema({
     default: ''
   },
   boardId: {
-    type: String,
-    default: ''
-  }
+    type: {type: Schema.Types.ObjectId, ref: 'Board'}
+  },
+  cardId: [{type: Schema.Types.ObjectId, ref: 'Card'}]
 })
 
-module.exports = model('BoardList', schema)
+const BoardList = model('BoardList', schema)
+
+module.exports = BoardList

@@ -10,9 +10,12 @@ const schema = new Schema({
     default: ''
   },
   users: {
-    type: Array,
-    default: []
-  }
+    type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  },
+  boardListId: [{ type: Schema.Types.ObjectId, ref: 'BoardList' }]
 })
 
-module.exports = model('Board', schema)
+const Board = model('Board', schema)
+
+module.exports = Board
+   

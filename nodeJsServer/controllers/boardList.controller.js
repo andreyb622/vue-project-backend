@@ -5,7 +5,7 @@ class BoardListController {
   
   getAll = async (req, res, next) => {
     try {
-      const result = await service.getAllBoardLists(req.body.boardId);
+      const result = await service.getAllBoardLists(req.params.id);
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))

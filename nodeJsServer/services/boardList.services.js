@@ -3,20 +3,15 @@ const { getAllCards } = require('./card.services')
 
 const boardList = (model) => ({
 
-  async getBoardList(id) {
-    return await model.findById(id)
-  },
+  // async getBoardList(id) {
+  //   return await model.findById(id)
+  // },
 
-  async getAllBoardLists(boardId) {
-    const allBoardLists = await model.find()
-    const boardLists = allBoardLists.filter((e, i) => e.boardId.includes(boardId))
-     
-    const boardListWithCards = await Promise.all(boardLists.map(async i => {
-      const cards = await getAllCards(i.id)
-      return { ...i._doc, cards: cards }
-    }))
-    return boardListWithCards
-  },
+  // async getAllBoardLists(boardId) {
+    
+  //   const allBoardLists = await model.find()
+  //   return allBoardLists
+  // },
   
   async createBoardList(body) {
     const boardList = new model(body)
@@ -33,5 +28,7 @@ const boardList = (model) => ({
     await model.findByIdAndDelete(id)
   }
 })
+
+
 
 module.exports = boardList(BoardList)

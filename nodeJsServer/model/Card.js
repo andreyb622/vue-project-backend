@@ -11,4 +11,6 @@ const schema = new Schema({
   }
 })
 
-module.exports = model('Card', schema)
+const Card = model('Card', schema)
+
+module.exports = Card

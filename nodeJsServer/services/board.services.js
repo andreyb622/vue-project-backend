@@ -1,18 +1,20 @@
 const { Board } = require('../model')
-const { getAllBoardLists } = require('./boardList.services')
 
 const board = (model) => ({
 
   async getBoard(boardId) {
-    const board = await model.findById(boardId)
-    const boardLists = await getAllBoardLists(boardId)
-    return { ...board._doc, boardLists: boardLists }
+    const board = await model.
+      findById(boardId).
+      populate({
+        path: 'boardListId',
+        populate: { path: 'cardId'} 
+      })
+    return board
   },
 
   async getAllBoards(userId) {
-    const allBoards = await model.find()
-    const boards = allBoards.filter(e => e.users.includes(userId))
-    return boards
+    const allBoards = await model.find({users: userId})
+    return allBoards  
   },
   
   async createBoard(userId, body) {

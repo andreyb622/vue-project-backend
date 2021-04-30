@@ -2,15 +2,15 @@ const { Card } = require('../model')
 
 const card = (model) => ({
 
-  async getCard(id) {    
-    return await model.findById(id)
-  },
+  // async getCard(id) {    
+  //   return await model.findById(id)
+  // },
 
-  async getAllCards(boardListId) {
-    const allCards = await model.find()
-    const cards = allCards.filter((e, i) => e.boardListId.includes(boardListId))
-    return cards
-  },
+  // async getAllCards(boardListId) {
+  //   const allCards = await model.find()
+  //   const cards = allCards.filter((e, i) => e.boardListId.includes(boardListId))
+  //   return cards
+  // },
   
   async createCard(body) {
     const card = new model(body)
