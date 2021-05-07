@@ -1,4 +1,4 @@
-const { Card } = require('../model')
+const Card = require('./card.model')
 
 const card = (model) => ({
 

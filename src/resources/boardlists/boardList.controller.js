@@ -1,11 +1,11 @@
 const boom = require('boom')
-const service = require('../services/card.services');
+const service = require('./boardList.services');
 
-class CardsController {
+class BoardListController {
   
   getAll = async (req, res, next) => {
     try {
-      const result = await service.getAllCards(req.body.boardListId);
+      const result = await service.getAllBoardLists(req.params.id);
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -14,7 +14,7 @@ class CardsController {
 
   get = async (req, res, next) => {
     try {
-      const result = await service.getCard(req.params.id);
+      const result = await service.getBoardList(req.params.id);
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -23,7 +23,7 @@ class CardsController {
   
   post = async (req, res, next) => {
     try {
-      const result = await service.createCard(req.body)
+      const result = await service.createBoardList(req.body)
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -32,7 +32,7 @@ class CardsController {
 
   put = async (req, res, next) => {
     try {
-      const user = await service.updateCard(req.params.id, req.body)
+      const user = await service.updateBoardList(req.params.id, req.body)
       res.status(200).send(user)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -41,12 +41,12 @@ class CardsController {
 
   delete = async (req, res, next) => {
     try {
-      await service.deleteCard(req.params.id)
-      res.status(200).send('card has been deleted')
+      await service.deleteBoardList(req.params.id)
+      res.status(200).send('boardList has been deleted')
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
     }
   }
 }
 
-module.exports = new CardsController;
+module.exports = new BoardListController;

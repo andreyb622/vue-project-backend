@@ -1,5 +1,4 @@
-const { BoardList } = require('../model')
-const { getAllCards } = require('./card.services')
+const BoardList = require('./boardList.model')
 
 const boardList = (model) => ({
 

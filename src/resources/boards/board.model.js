@@ -18,4 +18,3 @@ const schema = new Schema({
 const Board = model('Board', schema)
 
 module.exports = Board
-   

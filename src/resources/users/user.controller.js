@@ -1,20 +1,18 @@
 const boom = require('boom')
-const service = require('../services/boardList.services');
+const service = require('./user.services');
 
-class BoardListController {
-  
-  getAll = async (req, res, next) => {
+class UsersController {
+  get = async (req, res, next) => {
     try {
-      const result = await service.getAllBoardLists(req.params.id);
+      const result = await service.getUser(req.params.id)
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
     }
   }
-
-  get = async (req, res, next) => {
+  getAll = async (req, res, next) => {
     try {
-      const result = await service.getBoardList(req.params.id);
+      const result = await service.getAllUsers();
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -23,7 +21,7 @@ class BoardListController {
   
   post = async (req, res, next) => {
     try {
-      const result = await service.createBoardList(req.body)
+      const result = await service.createUser(req.body)
       res.status(200).send(result)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -32,7 +30,7 @@ class BoardListController {
 
   put = async (req, res, next) => {
     try {
-      const user = await service.updateBoardList(req.params.id, req.body)
+      const user = await service.updateUser(req.params.id, req.body)
       res.status(200).send(user)
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
@@ -41,12 +39,20 @@ class BoardListController {
 
   delete = async (req, res, next) => {
     try {
-      await service.deleteBoardList(req.params.id)
-      res.status(200).send('boardList has been deleted')
+      await service.deleteUser(req.params.id)
+      res.status(200).send('user has been deleted')
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
     }
   }
+
+  login = async (req, res) => {
+    try {
+      res.send(await authService.login(req))
+    } catch (err) {
+      return res.status(403).send(boom.boomify(err))
+    }
+  }
 }
 
-module.exports = new BoardListController;
+module.exports = new UsersController;

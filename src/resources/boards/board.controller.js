@@ -1,5 +1,5 @@
 const boom = require('boom')
-const service = require('../services/board.services');
+const service = require('./board.services');
 
 class BoardsController {
   

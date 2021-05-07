@@ -1,4 +1,4 @@
-const { User } = require('../model')
+const User = require('./user.model')
 
 const users = (model) => ({
   async getUser(id) {
@@ -22,6 +22,12 @@ const users = (model) => ({
 
   async deleteUser(id) {
     await model.findByIdAndDelete(id)
+  },
+
+  async login ({ body: { login, password } }) {
+    const user = await model.findByCredentials(login, password);
+    const token = model.generateAuthToken(user)
+    return {user, token}
   }
 })
 
