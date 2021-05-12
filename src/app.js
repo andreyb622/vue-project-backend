@@ -19,6 +19,6 @@ app.use(cors())
 
 app.use(router);
 
-app.listen(3000, () =>{
+app.listen(5000, () =>{
   console.log(`server on http://localhost:${PORT}`);
 })
