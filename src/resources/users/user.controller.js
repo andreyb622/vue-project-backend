@@ -2,7 +2,7 @@ const boom = require('boom')
 const service = require('./user.services');
 
 class UsersController {
-  get = async (req, res, next) => {
+  getUser = async (req, res, next) => {
     try {
       const result = await service.getUser(req.params.id)
       res.status(200).send(result)
@@ -10,7 +10,7 @@ class UsersController {
       return res.status(400).send(boom.boomify(err))
     }
   }
-  getAll = async (req, res, next) => {
+  getAllUser = async (req, res, next) => {
     try {
       const result = await service.getAllUsers();
       res.status(200).send(result)
@@ -19,7 +19,7 @@ class UsersController {
     }
   }
   
-  post = async (req, res, next) => {
+  createUser = async (req, res, next) => {
     try {
       const result = await service.createUser(req.body)
       res.status(200).send(result)
@@ -28,7 +28,7 @@ class UsersController {
     }
   }
 
-  put = async (req, res, next) => {
+  updateUser = async (req, res, next) => {
     try {
       const user = await service.updateUser(req.params.id, req.body)
       res.status(200).send(user)
@@ -37,20 +37,12 @@ class UsersController {
     }
   }
 
-  delete = async (req, res, next) => {
+  deleteUser = async (req, res, next) => {
     try {
       await service.deleteUser(req.params.id)
       res.status(200).send('user has been deleted')
     } catch (err) {
       return res.status(400).send(boom.boomify(err))
-    }
-  }
-
-  login = async (req, res) => {
-    try {
-      res.send(await authService.login(req))
-    } catch (err) {
-      return res.status(403).send(boom.boomify(err))
     }
   }
 }

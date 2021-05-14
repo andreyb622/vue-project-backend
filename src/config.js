@@ -6,7 +6,8 @@ dotenv.config({
 })
 
 module.exports = {
-  SECRET: process.env.JWT_SECRET_KEY,
+  JWT_SECRET: process.env.JWT_SECRET,
+  JWT_SECRET_REFRESH: process.env.JWT_SECRET_REFRESH,
   MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING,
   PORT: process.env.PORT
 }
